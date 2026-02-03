@@ -2,80 +2,78 @@
 
 A professional PHP + MySQL web application for managing shoe inventory, including branding, variants, and stock management. Designed with a premium aesthetic using a specific color palette: **#E83C91**, **#43334C**, **#F8F4EC**, **#ffffff**.
 
-## Project Structure
+---
 
-```
-/
-├── README.md
-├── assets/
-│   ├── css/
-│   │   └── style.css
-│   └── js/
-│       └── app.js
-├── config/
-│   └── db.php
-├── includes/
-│   └── functions.php
-├── public/
-│   ├── api/
-│   │   ├── add_brand.php
-│   │   └── get_variants.php
-│   ├── add.php
-│   ├── delete.php
-│   ├── edit.php
-│   ├── index.php
-│   ├── login.php
-│   ├── logout.php
-│   ├── search.php
-│   └── users.php
-├── sql/
-│   └── khutta_ma_jutta_v2.sql
-└── templates/
-    ├── auth/
-    │   └── login.php
-    ├── inventory/
-    │   ├── form.php
-    │   └── list.php
-    ├── users/
-    │   ├── form.php
-    │   └── list.php
-    ├── layout.php
-    └── partials/
+## 🛠️ Setup Instructions (XAMPP)
+
+Follow these steps to set up the project on your local machine using XAMPP:
+
+### 1. Project Placement
+Move the `Product_Ineventory_System` folder into your XAMPP's `htdocs` directory:
+- **Windows**: `C:\xampp\htdocs\Product_Ineventory_System`
+- **macOS**: `/Applications/XAMPP/xamppfiles/htdocs/Product_Ineventory_System`
+
+### 2. Database Setup
+1. Open **XAMPP Control Panel** and start **Apache** and **MySQL**.
+2. Open your browser and go to `http://localhost/phpmyadmin`.
+3. Create a new database named `khutta_ma_jutta`.
+4. Select the database, click the **Import** tab, and choose the SQL file:
+   - `sql/khutta_ma_jutta_v2.sql`
+5. Click **Go** to import the tables and default data.
+
+### 3. Configuration
+Edit `config/db.php` if your credentials differ from the defaults:
+```php
+define('DB_HOST', 'localhost');
+define('DB_NAME', 'khutta_ma_jutta');
+define('DB_USER', 'root');
+define('DB_PASS', '');
 ```
 
-## Setup
+### 4. Accessing the Application
+Open your browser and navigate to:
+`http://localhost/Product_Ineventory_System/public/index.php`
 
-1. **Database**  
-   Create a MySQL database (e.g., `inventory_system`). Import:  
-   `sql/khutta_ma_jutta_v2.sql`  
-   You can run this in phpMyAdmin or via command line.
+---
 
-2. **Config**  
-   Edit `config/db.php`: Set your `DB_HOST`, `DB_NAME`, `DB_USER`, and `DB_PASS`.
+## ✨ Features
 
-3. **Web Server**  
-   Run this project on an Apache/Nginx server (e.g., XAMPP/WAMP). Access the application via the `public/` folder.
+- **📊 Management Dashboard**: Overview of total products, low stock alerts, and total inventory value.
+- **🏷️ Brand & Category Management**: Dynamic brand registration via AJAX modals during product creation.
+- **👟 Advanced Variant Support**: Manage multiple sizes and colors (with HEX codes) for each shoe model.
+- **🔍 AJAX Live Search**: Real-time filtering by product name, brand, category, or type without page reloads.
+- **🔐 Secure Authentication**: Multi-level RBAC (Superadmin, Admin, User) with session-based security.
+- **🛡️ Enterprise Security**:
+  - **CSRF Protection**: All POST requests are validated with unique tokens.
+  - **SQL Injection Prevention**: Full use of PDO prepared statements.
+  - **XSS Sanitization**: Input cleaning and output escaping for all user-generated content.
+- **📱 Premium Responsive UI**: Crafted with modern CSS variables, smooth transitions, and a custom design system.
 
-## Login (default)
+---
 
-| Role      | Username | Password     |
-|-----------|----------|------------  |
-| Superadmin| admin    | admin123     |
-| Admin     | Shishir  | Shishir123   |
+## 🔑 Default Credentials
 
-Change these in production.
+| Role       | Username | Password   |
+|------------|----------|------------|
+| Superadmin | `admin`  | `admin123` |
+| Admin      | `Shishir`| `Shishir123` |
 
-## Features
+> [!WARNING]
+> Please change these credentials immediately after the first login in a production environment.
 
-- **Inventory Management**: Full CRUD for shoe products with brand and variant support.
-- **Role-Based Access**: Secure admin and user roles for system management.
-- **AJAX Live Search**: Real-time filtering by keyword, brand, and category using Fetch API.
-- **Responsive Design**: Premium UI crafted with CSS variables and custom typography.
-- **User Management**: Add and manage system users with different privilege levels.
+---
 
-## Security Notes
+## ⚠️ Known Issues & Notes
 
-- **CSRF Protection**: All forms include anti-CSRF tokens to prevent cross-site request forgery.
-- **XSS Prevention**: Inputs are sanitized and outputs are escaped using specialized helper functions.
-- **SQL Injection**: All database interactions use PDO prepared statements.
-- **Production Readiness**: Always update database credentials and use HTTPS for secure traffic.
+- **Session Expiry**: Sessions are handled by PHP defaults; if left idle, users may be redirected to login without a warning.
+- **Database Name Case-Sensitivity**: On some Linux environments, database/table names may be case-sensitive. Ensure `DB_NAME` matches exactly.
+- **File Permissions**: Ensure the server has read/write permissions for the project directory if any file logging or uploads are added in the future.
+
+---
+
+## 📑 Requirements
+
+- **PHP**: 7.4 or higher
+- **MySQL**: 5.7 or higher
+- **Web Server**: Apache (XAMPP/WAMP recommended)
+- **Browser**: Modern browser (Chrome, Firefox, Safari, Edge)
